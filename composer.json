@@ -1,0 +1,15 @@
+{
+    "name": "wannabesql/remise-ekspressen",
+    "autoload": {
+        "psr-4": {
+            "Wannabesql\\RemiseEkspressen\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ole Vølund Skov Mortensen",
+            "email": "olevsmortensen@dbc5radio.dk"
+        }
+    ],
+    "require": {}
+}
