@@ -4,7 +4,10 @@ class BookableCell
     private $booking;
  
     private $currentURL;
-     public function __construct(Booking $booking)
+
+    private int $Maxspace = 30;
+
+    public function __construct(Booking $booking)
     {
         $this->booking = $booking;
         $this->currentURL = htmlentities($_SERVER['REQUEST_URI']);
@@ -12,6 +15,7 @@ class BookableCell
  
     public function update(Calendar $cal)
     {
+        /*
         if ($this->isDateBooked($cal->getCurrentDate()) && $this->isDatePending($cal->getCurrentDate())) {
             return $cal->cellContent =
                 $this->pendingCell($cal->getCurrentDate());
@@ -21,45 +25,17 @@ class BookableCell
             return $cal->cellContent =
                 $this->bookedCell($cal->getCurrentDate());
         }
- 
+        */
         if (!$this->isDateBooked($cal->getCurrentDate())) {
             return $cal->cellContent =
-                $this->openCell($cal->getCurrentDate());
+                $this->openCell($cal->getCurrentDate(), $this->Maxspace);
         }
     }
- 
-    public function routeActions()
+
+    private function openCell($date, $space)
     {
-        if (isset($_GET['book'])) {
-            $name = $_GET['name'];
-            $dato = $_GET['date'];
-            $mailer = $_GET['receiver'];
-           $this->booking->prove($dato);
-          include('confirmation_mail.php');
-        }
-        if (isset($_GET['delete'])) {
-            $this->deleteBooking($_GET['date']);
-            include('rejected_mail.php');
-        }
-        if (isset($_POST['add'])) {
-            $pendingDay = $_POST['date'];
-            $name = $_POST['navnet'];
-            $adress = $_POST['adresse'];
-            $tel = $_POST['telefon'];
-            $mailer = $_POST['mail'];
-            if(!empty($mailer) && !empty($tel) && !empty($name)){
-                $this->addBooking($pendingDay, 0, $name);
-                include('phpmailer.php');
-                include('phpmailer_2.php');
-                $pendingDay= new DateTimeImmutable($pendingDay);
-                $month = $pendingDay->format('m');
-                $year = $pendingDay->format('Y');
-        }
-    }
-}
-    private function openCell($date)
-    {
-        return '<div class="open" value="'. date('Y-m-d', strtotime($date)) .'">' . date('j',strtotime($date)) . '</div>';
+        return '<a href="index-11.php?date=' . date('Y-m-d', strtotime($date)) .'"><div class="open" value="'. date('Y-m-d', strtotime($date)) .'">' . date('j',strtotime($date))
+        . '<div class="free">'  . $space .'/' . $space . ' Tilgængelige sæder</div></div></a>';
     }
 
     private function pendingCell($date)

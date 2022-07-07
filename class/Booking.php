@@ -2,15 +2,15 @@
 class Booking
 {
     private $dbh = null;
-    private $bookingsTableName = 'bookings';
+    private $bookingsTableName = 'booking';
     public function __construct()
     {
         try {          
-             $this->dbh = new PDO(sprintf('mysql:host=%s;dbname=%s', getenv('HOST'), getenv('DATABASE')),
-                    getenv('USER'),
-                    getenv('PASSWORD')
-                );
- 
+            $this->dbh = new PDO(
+                sprintf('mysql:host=%s;dbname=%s', getenv('HOST'), getenv('DATABASE')),  
+                getenv('USER'),
+                getenv('PASSWORD')
+            );
         } catch (PDOException $e) {
             die($e->getMessage());
         }
