@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "classmap": [
+            "assets/class"
+        ]
+    }
     "name": "wannabesql/remise-ekspressen",
     "autoload": {
         "psr-4": {
@@ -11,5 +16,10 @@
             "email": "olevsmortensen@dbc5radio.dk"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv" : "^4.1"
+    },"require-dev": {
+        "phpunit/phpunit": "^9",
+        "codedungeon/phpunit-result-printer": "^0.31.0"
+    }
 }
